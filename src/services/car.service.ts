@@ -33,6 +33,9 @@ export default class CarService implements IService<ICar> {
   }
 
   public async update(_id: string, obj: ICar): Promise<ICar> {
+    const parsed = CarZodSchema.safeParse(obj);
+    if (!parsed.success) throw parsed.error;
+
     const updatedCar = await this._car.update(_id, obj);
 
     if (!updatedCar) throw new CustomError(404, this._objNotFound);

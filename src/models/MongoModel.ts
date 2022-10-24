@@ -8,7 +8,7 @@ abstract class MongoModel<T> implements IModel<T> {
 
   constructor(model: Model<T>) {
     this._model = model;
-    this._invalidMongId = 'Id must be a 24 characters hexadecimal';
+    this._invalidMongId = 'Id must have 24 hexadecimal characters';
   }
 
   public async create(obj: T): Promise<T> {
@@ -37,8 +37,7 @@ abstract class MongoModel<T> implements IModel<T> {
 
   public async delete(_id: string): Promise<T | null> {
     if (!isValidObjectId(_id)) throw new CustomError(400, this._invalidMongId);
-    await this._model.deleteOne({ _id });
-    return null;
+    return this._model.findByIdAndDelete({ _id });
   }
 }
 

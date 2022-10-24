@@ -10,7 +10,7 @@ const errorHandler = (
 ) => {
   if (err instanceof CustomError) {
     const { status, message } = err as CustomError;
-    return res.status(status).json({ message });
+    return res.status(status).json({ error: message });
   }
 
   if (err instanceof ZodError) { 
