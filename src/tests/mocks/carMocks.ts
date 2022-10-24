@@ -37,3 +37,4 @@ export const carUpdateMockWithId = {
 }
 
 export const invalidMongId = 'Id must have 24 hexadecimal characters';
+export const objNotFound = 'Object not found';
